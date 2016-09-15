@@ -1,0 +1,82 @@
+\documentclass{beamer}
+
+\usepackage{algorithm}
+% \usepackage{algorithmic}
+\usepackage[noend]{algpseudocode} 
+
+\beamertemplatenavigationsymbolsempty
+\begin{document}
+
+% \begin{frame}[fragile]
+%   \frametitle{no}
+%   \begin{algorithm}
+%     \caption{\textsf{randQueryEmbedding}($\mathcal{D}$, $k$)}
+%     \label{algo:randQuery}
+%     \begin{algorithmic}[1]
+%       \State \textbf{Input:} a set of instances
+%       $\mathcal{D}=\{\mathbf{x}^{i}\}_{i=1}^{m}$ over r.v.s
+%       $\mathbf{X}=\{X_1,\dots,X_n\}$, $k$ as the number of features to generate
+%       \State  \textbf{Output:}  a set of embeddings
+%       $\mathcal{E}=\{\mathbf{e}^{i}\}_{i=1}^{m}, \mathbf{e}^{i}\in\mathbb{R}^{k}$
+
+%       \State $\theta\leftarrow\mathsf{learnDensityEstimator}(\mathcal{D})$
+%       \State $\mathcal{E}\leftarrow\{\}$
+%       \For {$j=1,\dots,k$}
+%       \State $\mathbf{Q}_{j}\leftarrow \mathsf{selectRandomRVs}(\mathbf{X})$
+%       \For {$i=1,\dots,m$}
+%       \State $e^{i}_{j}= p_{\theta}(\mathbf{x}^{i}_{\mathbf{Q}_{j}})$  
+%       \EndFor
+%       \State $\mathcal{E}\leftarrow\mathcal{E}\cup\{\mathbf{e}^{i}\}$
+%       \EndFor
+%       \Return {$\mathcal{E}$}
+%     \end{algorithmic}
+%   \end{algorithm}
+
+% \end{frame}
+
+
+\begin{frame}
+  % \vspace{-40pt}
+  \begin{algorithm}[H]
+    \caption{randPatchEmbedding($\mathcal{D}$, $s$,
+      $d$)}\label{rand-ii}
+    \small
+    \begin{algorithmic}[1]
+      \State \textbf{Input:} a set of instances
+      $\mathcal{D}=\{\mathbf{x}^{i}\}_{i=1}^{m}$ over r.v.s
+      $\mathbf{X}=\{X_1,\dots,X_n\}$,
+      $s$ as the number of patches to extract,
+      $d$ as the patch length,
+      \State  \textbf{Output:}  a set of embeddings
+      $\mathcal{E}=\{\mathbf{e}^{i}\}_{i=1}^{m}, \mathbf{e}^{i}\in\mathbb{R}^{k}$
+      \State $\mathcal{R}\leftarrow\{\}$
+      \For {$i=1,\dots,s$}
+      \State $\mathbf{x}^{\mathsf{rand}}\leftarrow
+      \mathsf{selectRandomSample}(\mathcal{D})$
+      \State $\mathbf{r}^{i}\leftarrow
+      \mathsf{extractRandomPatch}(\mathbf{x}^{\mathsf{rand}}, d)$
+      \State $\mathcal{R}\leftarrow\mathcal{R}\cup\{\mathbf{r}^{i}\}$
+      \EndFor
+      \State $\theta\leftarrow\mathsf{learnDensityEstimator}(\mathcal{R})$
+      \State $\mathcal{E}\leftarrow\{\}$
+      \For {$i=1,\dots,m$}
+      \State $j\leftarrow 0$
+      \For {\textbf{each} patch $\mathbf{q}^{i}, |\mathbf{q}^{i}|=d$ in
+      $\mathbf{x}^{i}$}
+      \State $e^{i}_{j}= p_{\theta}(\mathbf{q}^{i})$
+      \State $j\leftarrow j + 1$
+      \EndFor
+      \State $\mathcal{E}\leftarrow\mathcal{E}\cup\{\mathbf{e}^{i}\}$
+      \EndFor
+      \Return {$\mathcal{E}$}
+    \end{algorithmic}
+    \label{alg_1}
+  \end{algorithm}
+\end{frame}
+
+\end{document}
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

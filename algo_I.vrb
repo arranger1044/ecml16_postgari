@@ -1,0 +1,24 @@
+\frametitle{no}
+  \begin{algorithm}
+%    \caption{\textsf{randQueryEmbedding}($\mathcal{D}$, $k$)}
+%    \label{algo:randQuery}
+    \begin{algorithmic}[1]
+      \State \textbf{Input:} a set of instances
+      $\mathcal{D}=\{\mathbf{x}^{i}\}_{i=1}^{m}$ over r.v.s
+      $\mathbf{X}=\{X_1,\dots,X_n\}$, $k$ as the number of features to generate
+      \State  \textbf{Output:}  a set of embeddings
+      $\mathcal{E}=\{\mathbf{e}^{i}\}_{i=1}^{m}, \mathbf{e}^{i}\in\mathbb{R}^{k}$
+
+      \State $\theta\leftarrow\mathsf{learnDensityEstimator}(\mathcal{D})$
+      \State $\mathcal{E}\leftarrow\{\}$
+      \For {$j=1,\dots,k$}
+      \State $\mathbf{Q}_{j}\leftarrow \mathsf{selectRandomRVs}(\mathbf{X})$
+      \For {$i=1,\dots,m$}
+      \State $e^{i}_{j}= p_{\theta}(\mathbf{x}^{i}_{\mathbf{Q}_{j}})$
+      \EndFor
+      \State $\mathcal{E}\leftarrow\mathcal{E}\cup\{\mathbf{e}^{i}\}$
+      \EndFor
+      \Return {$\mathcal{E}$}
+    \end{algorithmic}
+  \end{algorithm}
+

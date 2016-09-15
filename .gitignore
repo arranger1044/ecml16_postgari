@@ -4,12 +4,13 @@
 *.bbl
 *.blg
 *.bgl
-*.bcf
-*.nav
-*.snm
 *.el
 **/auto/*
 *.synctex.gz
-*.run.xml
 *.out
 *camera-ready.zip
+*.nav
+*.run.xml
+*.snm
+*-blx.bib
+*.bcf
