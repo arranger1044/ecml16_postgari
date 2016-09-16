@@ -162,13 +162,13 @@
     \emph{\textbf{Density estimation}} is the unsupervised task of
     learning an estimator for the joint probability distribution
     $p(\mathbf{X})$ from a set of i.i.d. samples $\{\mathbf
-    x^i\}_{i=1}^m$ over RVs $\mathbf{X}$\\[20pt]
+    x^i\}_{i=1}^m$ over r.v.s $\mathbf{X}$\\[20pt]
     
     Given such an estimator, one uses it to answers
     probabilistic queries about configurations on $\mathbf{X}$,
     i.e. to do \emph{\textbf{inference}}\\[20pt]
     
-    Different kinds of inference query kinds:
+    Different kinds of inference queries to answer:
     \begin{itemize}
     \item $p(\mathbf{X} = \mathbf{x})$ pointwise evidence (EVI) 
     \item $p(\mathbf{E}), \mathbf{E}\subset\mathbf{X}$ marginals (MAR)
@@ -182,15 +182,15 @@
       \item sampling: generate $\mathbf{x}\sim p(\mathbf{X})$ (SAM)
     \end{itemize}\vspace{20pt}
     
-    Good estimators guarantee \emph{exact} and \emph{efficient} inference.
+    %Good estimators guarantee \emph{exact} and \emph{efficient} inference.
 
   \end{textblock}
   
   \begin{textblock}{25.2}(27.4, 13)
     \small
     \emph{\textbf{Tractable Probabilistic Models}}  (\textbf{TPMs})
-    are density estimators for which some kind of inference is
-    \emph{tractable}, i.e. polynomial in the number of r.v.s or their
+    are density estimators for which some kind of  \textbf{\emph{exact}} inference is
+    \textbf{\emph{tractable}}, i.e. polynomial in the number of r.v.s or their
     domains.\\[20pt]
 
     Different TPMs guarantee different inference kinds to be tractable.
@@ -201,7 +201,7 @@
     TPMs can be roughly classified into:
     \begin{itemize}
     \item \textbf{\emph{low-treewidth}} Probabilistic Graphical Models
-      (PGMs)($^*$)
+      (PGMs) ($^*$)
     \item \textbf{\emph{computational graphs}} compiling
       $p(\mathbf{X})$ ($^\times$)
     \item \textbf{\emph{neural autoregressive}} models ($^+$) 
@@ -209,7 +209,7 @@
      
   \end{textblock}
 
-  \begin{textblock}{52.5}(27.4, 19.5)
+  \begin{textblock}{52.5}(27.2, 19.2)
     \small
     \begin{minipage}[t]{0.19\linewidth}
       \begin{center}
@@ -303,8 +303,8 @@
     for each sample, with $f$ being a transformation provided by $\theta$ estimating the
     probability distribution $p$.\\[20pt]
 
-    Simple idea: exploit the \emph{geometric space} induced by $p$,
-    e.g. P-kernels, Fisher vectors\dots~\parencite{Shawe-Taylor2004},
+    Simple idea: exploit the \textbf{\emph{geometric space}} induced by $p_{\theta}$.\par
+    E.g. P-kernels, Fisher vectors\dots~\parencite{Shawe-Taylor2004},
     but:
     \begin{itemize}
     \item model dependent extraction
@@ -315,15 +315,15 @@
   
   \begin{textblock}{25.2}(27.4, 36.3)
     \small
-    We argue that TPMs can be employed as \emph{black box} embedding
-    extractors, on a common ground, by answering generated templated
+    We argue that TPMs can be employed as \textbf{\emph{black box}} embedding
+    extractors, by answering generated templated
     queries.\\[20pt]
 
     We define two approaches exploiting a random query generator
     schema:
     \begin{enumerate}[I]
     \item templates are constructed by \textbf{random marginal
-      queries}, i.e. generating subsets of r.v.s $\mathbf{Q}_{j} \subseteq
+      queries}, e.g. generating subsets of r.v.s $\mathbf{Q}_{j} \subseteq
     \mathbf{X}, j = 1\dots,d$:
     $$e_{j}^{i}=p_{\theta}(\mathbf{Q}_{j}=\mathbf{x}^{i}_{\mathbf{Q}_{j}})$$
   \item generating a dataset of random \emph{patches} from samples,
@@ -332,7 +332,7 @@
     $$e_{j}^{i}=p_{\theta}(\mathbf{q}^{i}),\forall \mathbf{q}^{i}\sim \mathbf{x}^{i}, |\mathbf{q}^{i}|=d$$
   \end{enumerate}\bigskip
 
-  Tractable inference is mandatory:
+  \emph{\textbf{Tractable inference is mandatory}}:
   for a congruous embedding size $k$, one has to perform $k\cdot
     m$ queries, e.g. on training split of BMNIST $k=10^{3},m=5\cdot
     10^{4}\rightarrow 5\cdot 10^{7}$ evals for approach I
@@ -349,24 +349,29 @@
 
   \begin{textblock}{25.2}(54.8, 36.3)
     \small
-    Planning an extensive experimentation comprising at least two TPMs
-    from each family class, on a wide range of query types\\[20pt]
+    \emph{Future}: Planning an extensive experimentation comprising at least two TPMs
+    from each family class, on a wide range of query types, from
+    datasets covering different application domains and employing both
+    embedding generation approaches\\[20pt]
     
-    Empirical evaluation of approach I on five binary image datasets
+    \emph{Present}: Empirical evaluation of approach I on \textbf{five binary image datasets}
     used for classification:
     \begin{itemize}
     \item rectangles (\textsf{REC}), $28\times 28$ pixels, wide VS
       tall rectangles
     \item convex (\textsf{CON}), $28\times 28$ pixels, convex VS
       concave shapes
-    \item ocr\_letters (\textsf{OCR}), $16\times 8$ pixels, ten digits
+    \item ocr\_letters (\textsf{OCR}), $16\times 8$ pixels, ten letters
     \item caltech101 (\textsf{CAL}), $28\times 28$ pixels, 101 object shapes
     \item binary MNIST (\textsf{BMN}), $28\times 28$ pixels, ten
       digits
     \end{itemize}\vspace{15pt}
     
-    Learning the structure of \emph{differently regularized} TPMs on RVs
-    $\mathbf{X}$ alone (unsupervised) to compare different \emph{model capacities}:
+    Learning the structure of \textbf{\emph{differently regularized} TPMs} on RVs
+    $\mathbf{X}$ alone (unsupervised) to compare different \emph{model
+      capacities}\par
+    ($\rightarrow$ does a model able of expressing more
+    complex probability distribution provide more accurate embeddings?):
     \begin{itemize}
     \item 3 SPN architectures trained with
       \textsf{LearnSPN-b}~\parencite{Vergari2015} with
@@ -380,20 +385,21 @@
       \textsf{MT-III}) trained with EM
     \end{itemize}\vspace{15pt}
     
-    Extracting embeddings, then training a linear classifier on top of
-    them to predict $Y$ (supervised):
+    Extracting embeddings, then training a \textbf{linear classifier}\par
+    on top of them \textbf{to predict} $Y$ (supervised):
     \begin{itemize}
-    \item OVR L2-reg logistic regressor for all representations, grid
-      search for regularization coefficient $C$ value in $\{0.0001, 0.001, 0.01, 0.1, 1.0\}$
+    \item OVR L2-reg logistic regressor for all representations,\par
+      grid search for regularization coefficient $C$ value in $\{0.0001, 0.001, 0.01, 0.1, 1.0\}$
       \item  baseline with initial representations ($\rightarrow$ \textsf{LR})
     \end{itemize}\vspace{15pt}
 
     
-    Generating random queries:
+    \textbf{Random query generation} scheme:
     \begin{itemize}
-    \item up to 1000 randomly generated marginal queries
-      \item generating RVs over adjacent pixels in rectangular patches of min sizes of 2, max of 7 pixels for
-      \textsf{OCR} and 10 pixels for the others
+    \item up to 1000 randomly generated \emph{marginal queries}
+      \item generating subsets of RVs in $\mathbf{X}$ over adjacent
+        pixels in rectangular patches of min sizes of 2, max of 7 pixels\par
+        for \textsf{OCR} and 10 pixels for the others
     \end{itemize}
   \end{textblock}
 
@@ -409,10 +415,12 @@
     
   \begin{textblock}{25.2}(0, 62.1)
     \small
-    Approach I demands models for which marginals can be tractable
+    \textbf{Approach I} demands \textbf{marginals} to be \textbf{tractable}
     \begin{itemize}
     \item more flexible: other kinds of inference kinds can be embedded,
-      e.g. more complex query types~\parencite{Bekker2015}
+      e.g. conditionals or more complex query
+      types~\parencite{Bekker2015}
+      \item exploiting already learned TPMs
     \end{itemize}
     \vspace{4pt}
     \begin{center}
@@ -483,10 +491,11 @@
         %   \Return {$\mathcal{E}$}
         % \end{algorithmic}
         % % \end{algorithm}
-        Approach II requires only tractable pointwise evidence
+        \textbf{Approach II} requires only \textbf{tractable pointwise evidence}
         \begin{itemize}
         \item largely employable: many more models can answer pointwise
           queries in a tractable way
+        \item needs to learn a TPM anew  
         \end{itemize}
         \begin{center}
           \includegraphics[width=0.9\linewidth]{algo_II}
@@ -506,28 +515,29 @@
     Results
   \end{textblock}
   
-  \begin{textblock}{25.2}(0, 85.4)
+  \begin{textblock}{25.2}(0, 98)
     \small
     For all models, less than $300$ features to beat the \textsf{LR}
     baseline\par
-    \hspace{30pt}$\rightarrow$ the geometric space induced is meaningful/useful
+    \hspace{15pt}$\rightarrow$ the \textbf{geometric space} induced by $p_{\theta}(\mathbf{X})$ is \textbf{meaningful}
   \end{textblock}
   
-  \begin{textblock}{25.2}(27.4, 85.4)
+  \begin{textblock}{25.2}(27.4, 98)
     \small
-    \textsf{SPN} embeddings outperform \textbf{MT} ones all datasets,
+    \textsf{SPN} embeddings outperform \textsf{MT} ones all datasets,
     but \textsf{CAL}\par
-    \hspace{30pt}$\rightarrow$ MT scoring best likelihoods on
-    $\mathbf{X}$ but worst accuracies for $Y$
+    \hspace{15pt}$\rightarrow$ \textbf{better likelihoods} on $\mathbf{X}$ may
+    lead to \textbf{worse accuracies} for $Y$
   \end{textblock}
   
-  \begin{textblock}{25.2}(54.8, 85.4)
+  \begin{textblock}{25.2}(54.8, 98)
     \small
-    More regularized models perform better than specialized ones\par
-    \hspace{30pt}$\rightarrow$ 
+    \textsf{SPN-I} models are often more predictive than \textsf{SPN-III} ones \par
+    \hspace{15pt}$\rightarrow$ \textbf{more regularized models better} than
+     specialized ones
   \end{textblock}
   
-  \begin{textblock}{80}(0, 89)
+  \begin{textblock}{80}(0, 84.8)
     \begin{center}
       \begin{minipage}[t]{0.2\linewidth}
         \begin{center}
@@ -599,11 +609,11 @@
 
   % 
   % footer
-  \begin{textblock}{80}(0, 114.3)
+  \begin{textblock}{80}(54.8, 114.3)
     \usebeamerfont{subtitle}
     \footnotesize
-    \flushright
-    \textbf{ECML-PKDD 2016}  -  19th-23rd September 2016, Riva del Garda, Italy\hfill
+    %\flushright
+    \textbf{ECML-PKDD 2016}  -  19th September 2016, Riva del Garda, IT\hfill
   \end{textblock}
   
 \end{frame}
